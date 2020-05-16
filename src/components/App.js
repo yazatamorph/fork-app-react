@@ -1,7 +1,12 @@
 import React from "react";
+import Piano from "./Piano";
 
 const App = () => {
-  return <div>This is an initial test component</div>;
+  return (
+    <div>
+      <Piano />
+    </div>
+  );
 };
 
 export default App;
