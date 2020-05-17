@@ -1,10 +1,16 @@
 import React from "react";
+import keyNotesArray from "../data/keyNotesArray";
+import PianoKeys from "./PianoKeys";
 
 class Piano extends React.Component {
+  playNote(note) {
+    // this is where the actual midi playback code goes
+  }
+
   render() {
     return (
       <div className="piano-keys">
-        <p1>These are piano keys</p1>
+        <PianoKeys noteList={keyNotesArray} />
       </div>
     );
   }
