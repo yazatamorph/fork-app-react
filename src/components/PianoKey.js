@@ -7,7 +7,7 @@ const PianoKey = (props) => {
       id={props.noteName}
       onMouseDown={(e) => props.onMouseDown(props.noteMidiValue)}
       onMouseUp={(e) => props.onMouseUp(props.noteMidiValue)}
-      onClick={(e) => props.onClick(props.noteName)}
+      onClick={(e) => props.onClick(e.timeStamp, props.noteName)}
     />
   );
 };

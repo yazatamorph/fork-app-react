@@ -21,6 +21,21 @@ class InputForm extends React.Component {
     this.props.onSubmit(this.state.term);
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.lastClick !== prevProps.lastClick) {
+      const newInputNotes = (
+        this.state.term +
+        " " +
+        this.props.inputNotes
+      ).split(" ");
+      if (newInputNotes.length > 2) {
+        newInputNotes.shift();
+      }
+      const newInput = newInputNotes.join(" ").toUpperCase();
+      this.setState({ term: newInput });
+    }
+  }
+
   render() {
     return (
       <div className="input-form">
@@ -36,6 +51,10 @@ class InputForm extends React.Component {
   }
 }
 
-InputForm.propTypes = { onSubmit: PropTypes.func };
+InputForm.propTypes = {
+  onSubmit: PropTypes.func,
+  inputNotes: PropTypes.string,
+  lastClick: PropTypes.number,
+};
 
 export default InputForm;

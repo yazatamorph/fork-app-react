@@ -22,7 +22,9 @@ class Piano extends React.Component {
 
   state = {
     keysToRender: [],
+    lastClick: null,
     inputNotes: "",
+    submittedNotes: "",
     intervalToPlay: { name: "", distance: null },
   };
 
@@ -42,9 +44,12 @@ class Piano extends React.Component {
           </div>
         );
       }),
-      intervalToPlay:
-        intervalsArray[Math.floor(Math.random() * intervalsArray.length)],
+      intervalToPlay: this.selectInterval(),
     });
+  }
+
+  selectInterval() {
+    return intervalsArray[Math.floor(Math.random() * intervalsArray.length)];
   }
 
   handleKeyRelease = (note) => {
@@ -72,19 +77,24 @@ class Piano extends React.Component {
     this.setState(this.state);
   };
 
-  handleKeyClick = (note) => {
-    console.log(note);
+  handleKeyClick = (time, note) => {
+    this.setState({ lastClick: time, inputNotes: note });
   };
 
   handleFormSubmission = (term) => {
-    console.log(term);
+    console.log(`Form Submission: ${term}`);
+    this.setState({ submittedNotes: term });
   };
 
   render() {
     return (
       <div className="piano-exercise">
         <PianoInstructions interval={this.state.intervalToPlay} />
-        <InputForm onSubmit={this.handleFormSubmission} />
+        <InputForm
+          inputNotes={this.state.inputNotes}
+          onSubmit={this.handleFormSubmission}
+          lastClick={this.state.lastClick}
+        />
         <div className="piano-keys">
           {this.state.keysToRender}
           <div className="midi-component">
