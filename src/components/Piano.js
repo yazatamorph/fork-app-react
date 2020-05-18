@@ -82,7 +82,54 @@ class Piano extends React.Component {
   };
 
   handleFormSubmission = (term) => {
-    console.log(`Form Submission: ${term}`);
+    const playedNotes = term.split(" ");
+    console.log("The played notes are", playedNotes);
+    let toDisplay;
+    if (playedNotes[0] === "") {
+      playedNotes.shift();
+    }
+    if (playedNotes.length < 2) {
+      toDisplay = "Not enough notes!";
+      // displayModal(
+      //   "feedback",
+      //   "Whoa now!",
+      //   "You need to play two notes to make an interval!",
+      //   () => {}
+      // );
+    } else {
+      const firstNote = keyNotesArray.find(
+        (note) => note.name === playedNotes[0]
+      );
+      const secondNote = keyNotesArray.find(
+        (note) => note.name === playedNotes[1]
+      );
+      const playedInterval = Math.abs(firstNote.val - secondNote.val);
+      if (playedInterval === this.state.intervalToPlay.distance) {
+        toDisplay = "Correct interval";
+        // displayModal(
+        //   "feedback",
+        //   "Nice!",
+        //   "That's right! Now try another one!",
+        //   () => {
+        //     requestInterval(intervals);
+        //     playInput.value = "";
+        //   }
+        // );
+      } else {
+        toDisplay = "Not the right interval";
+        // displayModal(
+        //   "feedback",
+        //   "Oops!",
+        //   "Not quite! Have a go at another.",
+        //   () => {
+        //     requestInterval(intervals);
+        //     playInput.value = "";
+        //   }
+        // );
+      }
+    }
+
+    console.log(`Form Submission: ${term} ${toDisplay}`);
     this.setState({ submittedNotes: term });
   };
 
