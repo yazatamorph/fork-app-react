@@ -23,15 +23,20 @@ class InputForm extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.lastClick !== prevProps.lastClick) {
-      const newInputNotes = (
-        this.state.term +
-        " " +
-        this.props.inputNotes
-      ).split(" ");
-      if (newInputNotes.length > 2) {
-        newInputNotes.shift();
+      let newInput;
+      if (this.props.inputNotes === "new") {
+        newInput = "";
+      } else {
+        const newInputNotes = (
+          this.state.term +
+          " " +
+          this.props.inputNotes
+        ).split(" ");
+        if (newInputNotes.length > 2) {
+          newInputNotes.shift();
+        }
+        newInput = newInputNotes.join(" ").toUpperCase();
       }
-      const newInput = newInputNotes.join(" ").toUpperCase();
       this.setState({ term: newInput });
     }
   }
@@ -45,6 +50,10 @@ class InputForm extends React.Component {
             value={this.state.term}
             onChange={this.handleInputState}
           />
+          <button type="submit">OK!</button>
+          <button type="button" onClick={(e) => this.setState({ term: "" })}>
+            Retry!
+          </button>
         </form>
       </div>
     );

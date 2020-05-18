@@ -7,7 +7,9 @@ import intervalsArray from "../data/intervalsArray";
 // importing author's components
 import PianoInstructions from "./PianoInstructions";
 import InputForm from "./InputForm";
+import FeedbackModal from "./FeedbackModal";
 import PianoKey from "./PianoKey";
+import HelpModal from "./HelpModal";
 
 class Piano extends React.Component {
   constructor(props) {
@@ -23,9 +25,11 @@ class Piano extends React.Component {
   state = {
     keysToRender: [],
     lastClick: null,
-    inputNotes: "",
+    inputNotes: "new",
     submittedNotes: "",
     intervalToPlay: { name: "", distance: null },
+    feedback: { title: "", message: "", show: false, type: "" },
+    helpShow: false,
   };
 
   componentDidMount() {
@@ -83,19 +87,19 @@ class Piano extends React.Component {
 
   handleFormSubmission = (term) => {
     const playedNotes = term.split(" ");
-    console.log("The played notes are", playedNotes);
-    let toDisplay;
     if (playedNotes[0] === "") {
       playedNotes.shift();
     }
     if (playedNotes.length < 2) {
-      toDisplay = "Not enough notes!";
-      // displayModal(
-      //   "feedback",
-      //   "Whoa now!",
-      //   "You need to play two notes to make an interval!",
-      //   () => {}
-      // );
+      this.setState({
+        feedback: {
+          title: "Woah now!",
+          message: "You need to play two notes to make an interval!",
+          show: true,
+          type: "incomplete",
+        },
+        submittedNotes: term,
+      });
     } else {
       const firstNote = keyNotesArray.find(
         (note) => note.name === playedNotes[0]
@@ -105,32 +109,50 @@ class Piano extends React.Component {
       );
       const playedInterval = Math.abs(firstNote.val - secondNote.val);
       if (playedInterval === this.state.intervalToPlay.distance) {
-        toDisplay = "Correct interval";
-        // displayModal(
-        //   "feedback",
-        //   "Nice!",
-        //   "That's right! Now try another one!",
-        //   () => {
-        //     requestInterval(intervals);
-        //     playInput.value = "";
-        //   }
-        // );
+        this.setState({
+          feedback: {
+            title: "Nice!",
+            message: "That's right! Now try another one!",
+            show: true,
+            type: "correct",
+          },
+          submittedNotes: term,
+        });
       } else {
-        toDisplay = "Not the right interval";
-        // displayModal(
-        //   "feedback",
-        //   "Oops!",
-        //   "Not quite! Have a go at another.",
-        //   () => {
-        //     requestInterval(intervals);
-        //     playInput.value = "";
-        //   }
-        // );
+        this.setState({
+          feedback: {
+            title: "Oops!",
+            message: "Not quite! Have a go at another.",
+            show: true,
+            type: "incorrect",
+          },
+          submittedNotes: term,
+        });
       }
     }
+  };
 
-    console.log(`Form Submission: ${term} ${toDisplay}`);
-    this.setState({ submittedNotes: term });
+  handleCloseFeedback = () => {
+    if (this.state.feedback.type !== "incomplete") {
+      this.setState({
+        inputNotes: "new",
+        lastClick: null,
+        intervalToPlay: this.selectInterval(),
+        feedback: { title: "", message: "", show: false, type: "" },
+      });
+    } else {
+      this.setState({
+        feedback: { title: "", message: "", show: false, type: "" },
+      });
+    }
+  };
+
+  handleOpenHelp = () => {
+    this.setState({ helpShow: true });
+  };
+
+  handleCloseHelp = () => {
+    this.setState({ helpShow: false });
   };
 
   render() {
@@ -152,6 +174,18 @@ class Piano extends React.Component {
             />
           </div>
         </div>
+        <FeedbackModal
+          title={this.state.feedback.title}
+          message={this.state.feedback.message}
+          show={this.state.feedback.show}
+          onClose={this.handleCloseFeedback}
+        />
+        <HelpModal
+          show={this.state.helpShow}
+          interval={this.state.intervalToPlay}
+          onOpen={this.handleOpenHelp}
+          onClose={this.handleCloseHelp}
+        />
       </div>
     );
   }
