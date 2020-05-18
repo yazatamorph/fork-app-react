@@ -1,6 +1,12 @@
 import React from "react";
+// importing 3rd-party components
 import MIDISounds from "midi-sounds-react";
+// importing author's data arrays
 import keyNotesArray from "../data/keyNotesArray";
+import intervalsArray from "../data/intervalsArray";
+// importing author's components
+import PianoInstructions from "./PianoInstructions";
+import InputForm from "./InputForm";
 import PianoKey from "./PianoKey";
 
 class Piano extends React.Component {
@@ -14,11 +20,31 @@ class Piano extends React.Component {
     this.handleKeyClick = this.handleKeyClick.bind(this);
   }
 
-  state = { inputNotes: "" };
+  state = {
+    keysToRender: [],
+    inputNotes: "",
+    intervalToPlay: { name: "", distance: null },
+  };
 
   componentDidMount() {
     this.envelopes = [];
-    this.setState(this.state);
+    this.setState({
+      keysToRender: keyNotesArray.map((note) => {
+        return (
+          <div key={keyNotesArray.indexOf(note)}>
+            <PianoKey
+              noteName={note.name}
+              noteMidiValue={note.midi}
+              onMouseDown={this.handleKeyPress}
+              onMouseUp={this.handleKeyRelease}
+              onClick={this.handleKeyClick}
+            />
+          </div>
+        );
+      }),
+      intervalToPlay:
+        intervalsArray[Math.floor(Math.random() * intervalsArray.length)],
+    });
   }
 
   handleKeyRelease = (note) => {
@@ -50,29 +76,25 @@ class Piano extends React.Component {
     console.log(note);
   };
 
-  keysToRender = keyNotesArray.map((note) => {
-    return (
-      <div key={keyNotesArray.indexOf(note)}>
-        <PianoKey
-          noteName={note.name}
-          noteMidiValue={note.midi}
-          onMouseDown={this.handleKeyPress}
-          onMouseUp={this.handleKeyRelease}
-          onClick={this.handleKeyClick}
-        />
-      </div>
-    );
-  });
+  handleFormSubmission = (term) => {
+    console.log(term);
+  };
 
   render() {
     return (
-      <div className="piano-keys">
-        {this.keysToRender}
-        <MIDISounds
-          ref={(ref) => (this.midiSounds = ref)}
-          appElementName="root"
-          instruments={[5]}
-        />
+      <div className="piano-exercise">
+        <PianoInstructions interval={this.state.intervalToPlay} />
+        <InputForm onSubmit={this.handleFormSubmission} />
+        <div className="piano-keys">
+          {this.state.keysToRender}
+          <div className="midi-component">
+            <MIDISounds
+              ref={(ref) => (this.midiSounds = ref)}
+              appElementName="root"
+              instruments={[5]}
+            />
+          </div>
+        </div>
       </div>
     );
   }
