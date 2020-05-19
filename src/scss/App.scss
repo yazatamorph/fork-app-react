@@ -1,0 +1,23 @@
+body {
+  /* background-color: #000000; */
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 140 * 0.65vh;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-body {
+  flex-grow: 1;
+}
+
+.app-footer {
+  color: #888888;
+  border-top: 1px solid #eeeeee;
+  margin-top: 16px;
+  padding: 16px 0;
+}

@@ -1,13 +1,25 @@
-$keyboard-modifier: 140;
 $key-lower-color: #000000;
 $key-lower-border: 3px solid $key-lower-color;
 $key-upper-color: #ffffff;
 $key-upper-border: 3px solid $key-upper-color;
 $key-border-rad: 5px;
 
+.ui-button {
+  cursor: pointer;
+  border: 1px solid #888888;
+  background: #888888;
+  color: white;
+  padding: 8px;
+  transition: 0.5s;
+
+  &:hover {
+    background: #f3f3f3;
+    color: #888888;
+  }
+}
+
 .piano-keyboard {
-  width: $keyboard-modifier * 0.65vh;
-  height: $keyboard-modifier * 0.4vh;
+  height: 45vh;
   padding-top: 8px;
   display: grid;
   grid-template-columns: repeat(30, 1fr);

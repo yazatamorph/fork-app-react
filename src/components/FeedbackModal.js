@@ -15,7 +15,9 @@ class FeedbackModal extends React.Component {
         <div className="feedback-modal-content">
           <h2 className="feedback-title">{this.props.title}</h2>
           <p className="feedback-message">{this.props.message}</p>
-          <button onClick={this.props.onClose}>Okie dokie!</button>
+          <button className="ui-button" onClick={this.props.onClose}>
+            Okie dokie!
+          </button>
         </div>
       </div>
     );

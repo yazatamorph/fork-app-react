@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../scss/InputForm.scss";
 
 class InputForm extends React.Component {
   state = { term: "" };
@@ -43,15 +44,21 @@ class InputForm extends React.Component {
 
   render() {
     return (
-      <div className="input-form">
-        <form onSubmit={this.handleFormSubmission}>
+      <div>
+        <form className="input-form" onSubmit={this.handleFormSubmission}>
           <input
             type="text"
             value={this.state.term}
             onChange={this.handleInputState}
           />
-          <button type="submit">OK!</button>
-          <button type="button" onClick={(e) => this.setState({ term: "" })}>
+          <button className="ui-button submit" type="submit">
+            OK!
+          </button>
+          <button
+            className="ui-button reset"
+            type="button"
+            onClick={(e) => this.setState({ term: "" })}
+          >
             Retry!
           </button>
         </form>

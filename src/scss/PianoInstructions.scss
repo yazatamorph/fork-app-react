@@ -1,0 +1,29 @@
+.piano-instructions {
+  height: 15vh;
+  width: 140 * 0.65vh;
+  padding-bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 4px;
+
+  h3 {
+    color: #333333;
+    text-align: center;
+    font-size: 48px;
+    grid-column: 1 / span 6;
+    grid-row: 2 / span 3;
+    margin: 0;
+    padding-bottom: 0;
+  }
+
+  h4 {
+    color: #555555;
+    text-align: center;
+    font-size: 26px;
+    grid-column: 1 / span 6;
+    grid-row: 1 / span 2;
+    margin: 0;
+    padding-bottom: 0;
+  }
+}

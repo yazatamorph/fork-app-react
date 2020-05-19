@@ -161,12 +161,14 @@ class Piano extends React.Component {
   render() {
     return (
       <div className="piano-exercise">
-        <PianoInstructions interval={this.state.intervalToPlay} />
-        <InputForm
-          inputNotes={this.state.inputNotes}
-          onSubmit={this.handleFormSubmission}
-          lastClick={this.state.lastClick}
-        />
+        <div className="piano-instruction-box">
+          <PianoInstructions interval={this.state.intervalToPlay} />
+          <InputForm
+            inputNotes={this.state.inputNotes}
+            onSubmit={this.handleFormSubmission}
+            lastClick={this.state.lastClick}
+          />
+        </div>
         <div className="piano-keyboard">{this.state.keysToRender}</div>
         <div className="midi-component">
           <MIDISounds
