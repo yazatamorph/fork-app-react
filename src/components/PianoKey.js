@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const PianoKey = (props) => {
   return (
     <button
+      className="piano-keys"
       id={props.noteName}
       onMouseDown={(e) => props.onMouseDown(props.noteMidiValue)}
       onMouseUp={(e) => props.onMouseUp(props.noteMidiValue)}

@@ -10,6 +10,8 @@ import InputForm from "./InputForm";
 import FeedbackModal from "./FeedbackModal";
 import PianoKey from "./PianoKey";
 import HelpModal from "./HelpModal";
+// importing stylesheet
+import "../scss/Piano.scss";
 
 class Piano extends React.Component {
   constructor(props) {
@@ -37,15 +39,16 @@ class Piano extends React.Component {
     this.setState({
       keysToRender: keyNotesArray.map((note) => {
         return (
-          <div key={keyNotesArray.indexOf(note)}>
-            <PianoKey
-              noteName={note.name}
-              noteMidiValue={note.midi}
-              onMouseDown={this.handleKeyPress}
-              onMouseUp={this.handleKeyRelease}
-              onClick={this.handleKeyClick}
-            />
-          </div>
+          // <div key={keyNotesArray.indexOf(note)}>
+          <PianoKey
+            key={keyNotesArray.indexOf(note)}
+            noteName={note.name}
+            noteMidiValue={note.midi}
+            onMouseDown={this.handleKeyPress}
+            onMouseUp={this.handleKeyRelease}
+            onClick={this.handleKeyClick}
+          />
+          // </div>
         );
       }),
       intervalToPlay: this.selectInterval(),
@@ -164,15 +167,13 @@ class Piano extends React.Component {
           onSubmit={this.handleFormSubmission}
           lastClick={this.state.lastClick}
         />
-        <div className="piano-keys">
-          {this.state.keysToRender}
-          <div className="midi-component">
-            <MIDISounds
-              ref={(ref) => (this.midiSounds = ref)}
-              appElementName="root"
-              instruments={[5]}
-            />
-          </div>
+        <div className="piano-keyboard">{this.state.keysToRender}</div>
+        <div className="midi-component">
+          <MIDISounds
+            ref={(ref) => (this.midiSounds = ref)}
+            appElementName="root"
+            instruments={[5]}
+          />
         </div>
         <FeedbackModal
           title={this.state.feedback.title}

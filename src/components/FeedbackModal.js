@@ -1,12 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../scss/FeedbackModal.scss";
 
 class FeedbackModal extends React.Component {
   render() {
     return (
       <div
         className={
-          this.props.show ? "modal display-block" : "modal display-none"
+          this.props.show
+            ? "feedback-modal feedback-show"
+            : "feedback-modal feedback-hide"
         }
       >
         <div className="feedback-modal-content">

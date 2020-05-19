@@ -10,9 +10,7 @@ class HelpModal extends React.Component {
         </button>
         <div
           className={
-            this.props.show
-              ? "help-modal display-block"
-              : "help-modal display-none"
+            this.props.show ? "help-modal help-show" : "help-modal help-hide"
           }
         >
           <div className="help-modal-content">
