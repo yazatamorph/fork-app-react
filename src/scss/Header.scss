@@ -1,0 +1,41 @@
+@import "config";
+
+$logo-head: 5vh;
+
+.icon-head {
+  position: fixed;
+  display: block;
+  left: 0;
+  top: 0;
+  margin-top: 0;
+  background-color: $top-bar;
+  height: 2vh + $logo-head;
+  width: 100vw;
+
+  .head-inner-bar {
+    height: 2vh + $logo-head;
+    width: 140 * 0.65vh;
+    margin: 0 auto;
+  }
+}
+
+.head-logo {
+  position: relative;
+  margin: 1vh 2vw;
+  height: $logo-head;
+}
+
+.title-div {
+  position: fixed;
+  display: inline-block;
+  padding: 0.7vh 0;
+  height: $logo-head;
+
+  .title-text {
+    margin: 0 0;
+    text-align: left;
+    font-size: 4.75vh;
+    color: $content-bg;
+    font-family: $font-headings;
+  }
+}

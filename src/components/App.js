@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 import Piano from "./Piano";
 import Footer from "./Footer";
 import "../scss/App.scss";
@@ -6,11 +7,14 @@ import "../scss/App.scss";
 const App = () => {
   return (
     <div>
-      <div className="app-body">
-        <h1 className="main-title">Fork</h1>
-        <Piano />
+      <Header />
+      <div className="app-body-wrapper">
+        <div className="app-body">
+          <div className="head-spacer" />
+          <Piano />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,23 +1,37 @@
+@import "config";
+
 body {
-  /* background-color: #000000; */
-  color: #333333;
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: $page-bg;
   width: 140 * 0.65vh;
   margin: 0 auto;
-  padding: 0 16px;
+}
 
+.app-body-wrapper {
+  background-color: $content-bg;
+  font-family: $font-text;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 .app-body {
+  padding: 1vh 4vw;
   flex-grow: 1;
 }
 
+.head-spacer {
+  margin: 0 0 0 0;
+  height: 7vh;
+}
+
 .app-footer {
-  color: #888888;
-  border-top: 1px solid #eeeeee;
-  margin-top: 16px;
-  padding: 16px 0;
+  font-family: $font-headings-alt;
+  color: $page-bg;
+  border-top: 1px solid $page-bg;
+  padding: 2vh 1vw;
+
+  p {
+    margin: 0;
+  }
 }

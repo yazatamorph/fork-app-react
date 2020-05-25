@@ -1,26 +1,28 @@
-$key-lower-color: #000000;
+@import "config";
+
+$key-lower-color: $piano-lower;
 $key-lower-border: 3px solid $key-lower-color;
-$key-upper-color: #ffffff;
+$key-upper-color: $piano-upper;
 $key-upper-border: 3px solid $key-upper-color;
 $key-border-rad: 5px;
 
 .ui-button {
   cursor: pointer;
-  border: 1px solid #888888;
-  background: #888888;
-  color: white;
-  padding: 8px;
+  border: 1px solid $text;
+  background: $text;
+  color: $content-bg;
+  padding: 1vh;
   transition: 0.5s;
 
   &:hover {
-    background: #f3f3f3;
-    color: #888888;
+    background: $content-bg;
+    color: $text;
   }
 }
 
 .piano-keyboard {
   height: 45vh;
-  padding-top: 8px;
+  padding: 1vh 0;
   display: grid;
   grid-template-columns: repeat(30, 1fr);
   grid-template-rows: repeat(3, auto);
@@ -31,34 +33,31 @@ $key-border-rad: 5px;
   transition: 0.5s;
 
   &:hover {
-    background-color: #888888;
-    border: #888888;
+    background-color: $piano-hover;
+    border: $piano-hover;
   }
 }
 // style for lower/white/whole keys
 %key-lower {
   cursor: pointer;
   z-index: 0;
-  // grid-column: 1 / span 2;
   grid-row: 1 / span 3;
   background: $key-lower-color;
   border: $key-lower-border;
   border-radius: $key-border-rad;
-  border-top-width: 0px;
-  // border-top-left-radius: 0px; border-top-right-radius: 0px;
+  border-top-width: 0;
 }
 // style for upper/black/half keys
 %key-upper {
   cursor: pointer;
   z-index: 1;
-  // grid-column: 2 / span 2;
   grid-row: 1 / span 2;
   background: $key-upper-color;
   border: $key-upper-border;
   border-radius: $key-border-rad;
-  border-top-width: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-top-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 // placing lower/white/whole keys
 [id="C4"] {
